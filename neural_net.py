@@ -10,8 +10,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
-data_dir = "prepared_source_images"
-data_dir = pathlib.Path(data_dir)
+data_dir = pathlib.Path("prepared_source_images")
 
 image_count = len(list(data_dir.glob('*/*.tiff')))+len(list(data_dir.glob('*/*.jpg')))
 print(image_count)
@@ -23,8 +22,6 @@ globs = []
 i = 0
 for label in labels:
     globs.append(list(data_dir.glob(str(label) + '/*')))
-    #print(globs)
-    #PIL.Image.open(str(globs[i][0])).show()
     i += 1
 
 batch_size = 32
