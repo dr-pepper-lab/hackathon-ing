@@ -116,3 +116,18 @@ val_loss = history.history['val_loss']
 
 epochs_range = range(epochs)
 
+pred_path = str(data_dir) + '/advertisement/00133f89-017d-44f5-a549-e11cf5b5221a.tiff'
+
+img = tf.keras.utils.load_img(
+    pred_path, target_size=(img_height, img_width)
+)
+img_array = tf.keras.utils.img_to_array(img)
+img_array = tf.expand_dims(img_array, 0)
+
+predictions = model.predict(img_array)
+score = tf.nn.softmax(predictions[0])
+
+print(
+    "This image most likely belongs to {} with a {:.2f} percent confidence."
+    .format(class_names[np.argmax(score)], 100 * np.max(score))
+)
