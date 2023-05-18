@@ -10,7 +10,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
-data_dir = sys.argv[1]
+data_dir = "prepared_source_images"
 data_dir = pathlib.Path(data_dir)
 
 image_count = len(list(data_dir.glob('*/*.tiff')))+len(list(data_dir.glob('*/*.jpg')))
@@ -116,7 +116,7 @@ val_loss = history.history['val_loss']
 
 epochs_range = range(epochs)
 
-pred_path = sys.argv[2]
+pred_path = sys.argv[1]
 
 img = tf.keras.utils.load_img(
     pred_path, target_size=(img_height, img_width)
