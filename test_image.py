@@ -4,8 +4,6 @@ import sys
 import cv2
 import os
 
-from tensorflow.keras import layers
-from tensorflow.keras.models import Sequential
 
 class_names = ["advertisement", "budget", "email", "file_folder", "form", "handwritten", "invoice", "letter", "memo", "news_article", "pit37_v1", "pozwolenie_uzytkowanie_obiektu_budowlanego", "presentation", "questionnaire", "resume", "scientific_publication", "scientific_report", "specification", "umowa_na_odleglosc_odstapienie", "umowa_o_dzielo", "umowa_sprzedazy_samochodu"]
 
@@ -31,9 +29,8 @@ def test_image(path):
     )
 
     img = cv2.imread(path,cv2.IMREAD_COLOR)
-    img = cv2.putText(img, str(100*np.max(score))[0:2] + " " +  class_names[np.argmax(score)], (50, 180), cv2.QT_FONT_NORMAL, 
-                    3, (194,24,91), 3, cv2.LINE_AA)
-    cv2.imshow('Tested image', img)
+    title = str(100*np.max(score))[0:2] + " " +  class_names[np.argmax(score)]
+    cv2.imshow(title, img)
     cv2.waitKey()
     cv2.destroyAllWindows()
 
