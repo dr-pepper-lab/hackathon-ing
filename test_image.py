@@ -31,8 +31,8 @@ def test_image(path):
     )
 
     img = cv2.imread(path,cv2.IMREAD_COLOR)
-    img = cv2.putText(img, str(100*np.max(score))[0:2] + class_names[np.argmax(score)], (50, 180), cv2.QT_FONT_NORMAL, 
-                    4, (194,24,91), 10, cv2.LINE_AA)
+    img = cv2.putText(img, str(100*np.max(score))[0:2] + " " +  class_names[np.argmax(score)], (50, 180), cv2.QT_FONT_NORMAL, 
+                    3, (194,24,91), 3, cv2.LINE_AA)
     cv2.imshow('Tested image', img)
     cv2.waitKey()
     cv2.destroyAllWindows()
