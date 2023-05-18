@@ -22,7 +22,7 @@ for label in labels:
     globs.append(list(data_dir.glob(str(label) + '/*')))
     i += 1
 
-batch_size = 32
+batch_size = 64
 img_height = 200
 img_width = 160
 
@@ -77,14 +77,14 @@ num_classes = len(class_names)
 
 model = Sequential([
   layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
-  layers.Conv2D(16, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
   layers.Conv2D(32, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
+  layers.Dropout(0.4),
   layers.Conv2D(64, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
+  layers.Dropout(0.4),
   layers.Flatten(),
-  layers.Dense(128, activation='relu'),
+  layers.Dense(128, activation='sigmoid'),
   layers.Dense(num_classes)
 ])
 
@@ -94,11 +94,14 @@ model.compile(optimizer='adam',
 
 model.summary()
 
+es_callback = keras.callbacks.EarlyStopping(monitor='val_loss', patience=2)
+
 epochs=10
 history = model.fit(
   train_ds,
   validation_data=val_ds,
-  epochs=epochs
+  epochs=epochs,
+  callbacks=[es_callback]
 )
 
 acc = history.history['accuracy']
@@ -110,4 +113,5 @@ val_loss = history.history['val_loss']
 epochs_range = range(epochs)
 
 model.save('IngModel.h5')
-model.save_weights('IngModelWeights')
+model.save_weights('IngModelWeights.h5')
+
