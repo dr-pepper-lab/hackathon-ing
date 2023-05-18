@@ -113,6 +113,9 @@ val_loss = history.history['val_loss']
 
 epochs_range = range(epochs)
 
+model.save('IngModel.h5')
+model.save_weights('IngModelWeights')
+
 pred_path = sys.argv[1]
 
 img = tf.keras.utils.load_img(

@@ -1,1 +1,4 @@
 prepared_source_images/
+IngModel.h5
+IngModelWeights*
+checkpoint
