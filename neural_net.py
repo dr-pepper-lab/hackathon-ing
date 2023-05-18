@@ -4,15 +4,16 @@ import pathlib
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import sys
 
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
-data_dir = "train_set1"
+data_dir = sys.argv[1]
 data_dir = pathlib.Path(data_dir)
 
-image_count = len(list(data_dir.glob('*/*.tiff')))
+image_count = len(list(data_dir.glob('*/*.tiff')))+len(list(data_dir.glob('*/*.jpg')))
 print(image_count)
 
 labels = {"advertisement": 0, "budget": 1, "email": 2, "file_folder": 3, "form": 4, "handwritten": 5, "invoice": 6, "letter": 7, "memo": 8, "news_article": 9, "pit37_v1": 10, "pozwolenie_uzytkowanie_obiektu_budowlanego": 11, "presentation": 12, "questionnaire": 13, "resume": 14, "scientific_publication": 15, "scientific_report": 16, "specification": 17, "umowa_na_odleglosc_odstapienie": 18, "umowa_o_dzielo": 19, "umowa_sprzedazy_samochodu": 20}
