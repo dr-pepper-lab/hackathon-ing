@@ -94,9 +94,9 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-es_callback = keras.callbacks.EarlyStopping(monitor='val_loss', patience=3)
+es_callback = keras.callbacks.EarlyStopping(monitor='val_loss', patience=2)
 
-epochs=5
+epochs=10
 history = model.fit(
   train_ds,
   validation_data=val_ds,
