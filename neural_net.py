@@ -116,7 +116,7 @@ val_loss = history.history['val_loss']
 
 epochs_range = range(epochs)
 
-pred_path = str(data_dir) + '/advertisement/00133f89-017d-44f5-a549-e11cf5b5221a.tiff'
+pred_path = sys.argv[2]
 
 img = tf.keras.utils.load_img(
     pred_path, target_size=(img_height, img_width)
