@@ -1,7 +1,8 @@
 from test_image import test_image
 import os
+import pathlib
 
-path = "test_set"
+path = pathlib.Path(sys.argv[1])
 img_height = 200
 img_width = 160
 
