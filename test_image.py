@@ -5,15 +5,13 @@ import cv2
 import os
 
 
-class_names = ["advertisement", "budget", "email", "file_folder", "form", "handwritten", "invoice", "letter", "memo", "news_article", "pit37_v1", "pozwolenie_uzytkowanie_obiektu_budowlanego", "presentation", "questionnaire", "resume", "scientific_publication", "scientific_report", "specification", "umowa_na_odleglosc_odstapienie", "umowa_o_dzielo", "umowa_sprzedazy_samochodu"]
-
-img_height = 200
-img_width = 160
-model = tf.keras.models.load_model('IngModel.h5')
-
-pred_path = sys.argv[1]
-
 def test_image(path):
+
+    img_height = 200
+    img_width = 160
+
+    model = tf.keras.models.load_model('IngModel.h5')
+
     img = tf.keras.utils.load_img(
         path, target_size=(img_height, img_width)
     )
@@ -22,6 +20,8 @@ def test_image(path):
 
     predictions = model.predict(img_array)
     score = tf.nn.softmax(predictions[0])
+
+    class_names = ["advertisement", "budget", "email", "file_folder", "form", "handwritten", "invoice", "letter", "memo", "news_article", "pit37_v1", "pozwolenie_uzytkowanie_obiektu_budowlanego", "presentation", "questionnaire", "resume", "scientific_publication", "scientific_report", "specification", "umowa_na_odleglosc_odstapienie", "umowa_o_dzielo", "umowa_sprzedazy_samochodu"]
 
     print(
         "This image most likely belongs to {} with a {:.2f} percent confidence."
@@ -34,8 +34,14 @@ def test_image(path):
     cv2.waitKey()
     cv2.destroyAllWindows()
 
-if os.path.isfile(pred_path):
-    test_image(pred_path)
-elif os.path.isdir(pred_path):
-    for img in os.scandir(pred_path):
-        test_image(img.path)
+    return(class_names[np.argmax(score)])
+
+if __name__ == "__main__":
+
+    pred_path = sys.argv[1]
+
+    if os.path.isfile(pred_path):
+        test_image(pred_path)
+    elif os.path.isdir(pred_path):
+        for img in os.scandir(pred_path):
+            test_image(img.path)
