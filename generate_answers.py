@@ -13,4 +13,8 @@ for filename in os.listdir(path):
     f = os.path.join(path, filename)
     if os.path.isfile(f):
         with open("Dr_Pepper_test_ids_final.csv", "a+") as fl:
-            fl.write(filename + "," + str(labels[str(test_image(f))]) + "\n")
+            try:
+                fl.write(filename + "," + str(labels[str(test_image(f))]) + "\n")
+            except:
+                pass
+            
