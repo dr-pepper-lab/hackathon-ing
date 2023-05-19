@@ -1,6 +1,7 @@
 from test_image import test_image
 import os
 import pathlib
+import sys
 
 path = pathlib.Path(sys.argv[1])
 img_height = 200
@@ -11,5 +12,5 @@ labels = {"advertisement": 0, "budget": 1, "email": 2, "file_folder": 3, "form":
 for filename in os.listdir(path):
     f = os.path.join(path, filename)
     if os.path.isfile(f):
-        with open("submission_file.csv", "a+") as fl:
+        with open("Dr_Pepper_test_ids_final.csv", "a+") as fl:
             fl.write(filename + "," + str(labels[str(test_image(f))]) + "\n")
